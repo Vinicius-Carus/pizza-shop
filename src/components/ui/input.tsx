@@ -1,8 +1,15 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { useFormContext } from "react-hook-form";
 
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+interface IInputProps extends React.ComponentProps<"input"> {
+  name: string;
+}
+
+function Input({ className, type, name, ...props }: IInputProps) {
+  const { register } = useFormContext();
+
   return (
     <input
       type={type}
@@ -14,6 +21,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
         className,
       )}
       {...props}
+      {...register(name)}
     />
   );
 }

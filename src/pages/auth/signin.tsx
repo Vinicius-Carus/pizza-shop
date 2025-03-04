@@ -2,25 +2,37 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Helmet } from "react-helmet-async";
-import { useForm } from "react-hook-form";
-import z from "zod";
+import { useForm, FormProvider } from "react-hook-form";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
-const singInFormSchema = z.object({ email: z.string().email() });
+const signInFormSchema = z.object({ email: z.string().email() });
 
-type SignInFormSchemaType = z.infer<typeof singInFormSchema>;
+type SignInFormSchemaType = z.infer<typeof signInFormSchema>;
 
 export default function SignIn() {
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<SignInFormSchemaType>({
-    resolver: zodResolver(singInFormSchema),
+  const signInForm = useForm<SignInFormSchemaType>({
+    resolver: zodResolver(signInFormSchema),
   });
 
-  function handleSingIn(data: SignInFormSchemaType) {
-    console.log(data);
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = signInForm;
+
+  function handleSignIn(data: SignInFormSchemaType) {
+    try {
+      console.log(data);
+      toast.success("Enviamos um link de autenticação para seu e-mail", {
+        action: {
+          label: "Reenviar",
+          onClick: () => handleSignIn(data),
+        },
+      });
+    } catch (error) {
+      toast.error("Credenciais inválidas");
+    }
   }
 
   return (
@@ -36,18 +48,20 @@ export default function SignIn() {
               Acompanhe suas vendas
             </span>
           </div>
-          <form
-            onSubmit={handleSubmit(handleSingIn)}
-            className="flex flex-col gap-4"
-          >
-            <div className="space-y-2">
-              <Label htmlFor="email">Seu e-mail</Label>
-              <Input id="email" type="email" {...register("email")} />
-            </div>
-            <Button disabled={isSubmitting} className="w-full" type="submit">
-              Acessar painel
-            </Button>
-          </form>
+          <FormProvider {...signInForm}>
+            <form
+              onSubmit={handleSubmit(handleSignIn)}
+              className="flex flex-col gap-4"
+            >
+              <div className="space-y-2">
+                <Label htmlFor="email">Seu e-mail</Label>
+                <Input id="email" type="email" name="email" />
+              </div>
+              <Button disabled={isSubmitting} className="w-full" type="submit">
+                Acessar painel
+              </Button>
+            </form>
+          </FormProvider>
         </div>
       </div>
     </>
