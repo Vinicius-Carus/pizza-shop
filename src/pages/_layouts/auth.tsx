@@ -13,7 +13,7 @@ export default function AuthLayout() {
           Painel do parceiro &copy; pizza.shop - {new Date().getFullYear()}
         </footer>
       </div>
-      <div className="flex items-center justify-center">
+      <div className="relative flex items-center justify-center">
         <Outlet />
       </div>
     </div>
