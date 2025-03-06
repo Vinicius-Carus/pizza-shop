@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Helmet } from "react-helmet-async";
 import { useForm, FormProvider } from "react-hook-form";
@@ -7,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Link } from "react-router";
+import { InputHookForm } from "@/components/ui/input-hook-form";
 
 const signInFormSchema = z.object({ email: z.string().email() });
 
@@ -41,7 +41,7 @@ export default function SignIn() {
       <Helmet title="SignIn" />
       <div className="p-8">
         <Button asChild variant={"ghost"} className="absolute top-8 right-8">
-          <Link to={"sign-up"}>Novo estabelecimetno</Link>
+          <Link to={"/sign-up"}>Novo estabelecimetno</Link>
         </Button>
 
         <div className="flex w-[350px] flex-col justify-center gap-6">
@@ -60,7 +60,7 @@ export default function SignIn() {
             >
               <div className="space-y-2">
                 <Label htmlFor="email">Seu e-mail</Label>
-                <Input id="email" type="email" name="email" />
+                <InputHookForm id="email" type="email" name="email" />
               </div>
               <Button disabled={isSubmitting} className="w-full" type="submit">
                 Acessar painel

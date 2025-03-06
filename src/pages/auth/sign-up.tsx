@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Helmet } from "react-helmet-async";
 import { useForm, FormProvider } from "react-hook-form";
@@ -7,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router";
+import { InputHookForm } from "@/components/ui/input-hook-form";
 const signUpFormSchema = z.object({
   restaurantName: z.string(),
   managerName: z.string(),
@@ -66,22 +66,30 @@ export default function SignUp() {
             >
               <div className="space-y-2">
                 <Label htmlFor="restaurant">Nome do estabelecimento</Label>
-                <Input id="restaurant" type="text" name="restaurantName" />
+                <InputHookForm
+                  id="restaurant"
+                  type="text"
+                  name="restaurantName"
+                />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="managerName">Seu nome</Label>
-                <Input id="managerName" type="text" name="managerName" />
+                <InputHookForm
+                  id="managerName"
+                  type="text"
+                  name="managerName"
+                />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email">Seu e-mail</Label>
-                <Input id="email" type="email" name="email" />
+                <InputHookForm id="email" type="email" name="email" />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="phone">Seu celular</Label>
-                <Input id="phone" type="text" name="phone" />
+                <InputHookForm id="phone" type="text" name="phone" />
               </div>
 
               <Button disabled={isSubmitting} className="w-full" type="submit">
