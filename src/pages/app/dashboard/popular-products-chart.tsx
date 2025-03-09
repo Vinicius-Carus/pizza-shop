@@ -41,8 +41,8 @@ export default function PopularProductsChart() {
               nameKey="product"
               cx="50%"
               cy="50%"
-              outerRadius={64}
-              innerRadius={86}
+              outerRadius={86}
+              innerRadius={64}
               strokeWidth={8}
               labelLine={false}
               label={({
