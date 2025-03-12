@@ -5,7 +5,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { InputHookForm } from "@/components/ui/input-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "@/api/sign-in";
@@ -15,8 +15,11 @@ const signInFormSchema = z.object({ email: z.string().email() });
 type SignInFormSchemaType = z.infer<typeof signInFormSchema>;
 
 export default function SignIn() {
+  const [searchParams] = useSearchParams();
+
   const signInForm = useForm<SignInFormSchemaType>({
     resolver: zodResolver(signInFormSchema),
+    defaultValues: { email: searchParams.get("email") ?? "" },
   });
 
   const {
