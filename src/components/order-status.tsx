@@ -1,4 +1,4 @@
-type OrderStatus =
+export type OrderStatus =
   | "pending"
   | "canceled"
   | "processing"
@@ -13,8 +13,8 @@ const orderStatusMap: Record<OrderStatus, string> = {
   pending: "Pendente",
   canceled: "Cancelado",
   processing: "Em preparo",
-  delivering: "Entregue",
-  delivered: "Em entrega",
+  delivering: "Em entrega",
+  delivered: "Entregue",
 };
 
 export function OrderStatus({ status }: OrderStatusProps) {
