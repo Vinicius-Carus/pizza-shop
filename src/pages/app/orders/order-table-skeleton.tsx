@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { Search } from "lucide-react";
-import React from "react";
 
 export default function OrderTableSkeleton() {
   return Array.from({ length: 10 }).map((_, i) => (
