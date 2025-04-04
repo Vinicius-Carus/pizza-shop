@@ -36,7 +36,6 @@ export default function RevenueChart() {
       getDailyRevenueInPeriod({ from: dateRange?.from, to: dateRange?.to }),
     queryKey: ["metrics", "daily-revenue-in-period", dateRange],
   });
-
   const chartData = useMemo(() => {
     return dailyRevenueInPeriod?.map((chartItem) => ({
       date: chartItem.date,
