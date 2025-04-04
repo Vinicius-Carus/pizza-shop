@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router";
 import { InputHookForm } from "@/components/ui/input-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { registerRestaurant } from "@/api/register-restaurant";
+
 const signUpFormSchema = z.object({
   restaurantName: z.string(),
   managerName: z.string(),
@@ -34,9 +35,9 @@ export default function SignUp() {
     mutationFn: registerRestaurant,
   });
 
-  function handleSignUp(data: SignUpFormSchemaType) {
+  async function handleSignUp(data: SignUpFormSchemaType) {
     try {
-      registerRestaurantFn({
+      await registerRestaurantFn({
         restaurantName: data.restaurantName,
         email: data.email,
         managerName: data.managerName,
